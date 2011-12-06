@@ -1,0 +1,12 @@
+
+ Usage examples:
+
+   Print a resume of your exceptions:
+   $ cat my.log | highex 
+
+   Print your full log with the exceptions highlighted
+   $ cat my.log | highex -p
+
+   Tail a log file highlighting your exceptions
+   $ tail -300f my.log | highex -p
+
