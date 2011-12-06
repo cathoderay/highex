@@ -1,5 +1,5 @@
 
- Usage examples:
+Usage examples:
 
    Print a resume of your exceptions:
    $ cat my.log | highex 
@@ -9,4 +9,9 @@
 
    Tail a log file highlighting your exceptions
    $ tail -300f my.log | highex -p
+
+
+TODO:
+ Remove prefix when log is formatted, e.g.:
+  INFO   | jvm 1    | 2011/12/06 00:39:26 |   at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:113)
 
