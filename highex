@@ -22,10 +22,9 @@ def process(print_lines=False):
     line = raw_input()
     n = 0
     print_lines = print_lines
+    red = '\033[91m'
+    white = '\033[0m'
     while line:
-        red = '\033[91m'
-        white = '\033[0m'
-        
         if line.startswith('\t'):
             if exception == False:
                 exceptions.append((n, line)) 
