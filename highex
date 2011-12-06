@@ -1,0 +1,57 @@
+#/usr/bin/env python
+# -*- coding:utf-8 -*-
+#
+# File: highex
+# Description: Get your java log exceptions highlighted, ;)
+#
+# Usage examples:
+#
+#   Print a resume of your exceptions:
+#   $ cat my.log | highex 
+#
+#   Print your full log with the exceptions highlighted
+#   $ cat my.log | highex -p
+#
+#   Tail a log file highlighting your exceptions
+#   $ tail -300f my.log | highex -p
+#
+
+def process(print_lines=False):
+    exception = False
+    exceptions = []
+    line = raw_input()
+    n = 0
+    print_lines = print_lines
+    while line:
+        red = '\033[91m'
+        white = '\033[0m'
+        
+        if line.startswith('\t'):
+            if exception == False:
+                exceptions.append((n, line)) 
+            exception = True
+            if print_lines: 
+                print "%s%s%s" % (red, line, white)
+        else:
+            exception = False
+            if print_lines:
+                print line
+        try:
+            n += 1
+            line = raw_input()
+        except EOFError, e:
+            print 50*'-'
+            print "Finished reading file."
+            print "Exceptions found:" 
+            for line_number, exception in exceptions:
+                print "line %s: %s%s%s" % (line_number, red, exception, white)
+            print 50*'-'
+            exit(0)
+
+if __name__ == '__main__':
+    import sys
+    print_lines = False
+    if len(sys.argv) > 1 and sys.argv[1] == '-p':
+        print_lines = True
+    process(print_lines)
+
